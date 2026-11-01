@@ -1,0 +1,672 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRAVEL SCHOOL</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #FFFFFD;
+      color: #51434A;
+      font-family: "Malgun Gothic", sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 8%;
+      border-bottom: 1px solid #F3E4EA;
+      background: #FFFCFD;
+      gap: 18px;
+    }
+
+    .logo {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #67515C;
+      white-space: nowrap;
+    }
+
+    .nav-label {
+      color: #B18A9C;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .auth-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-button {
+      border: 1px solid #EAD0DC;
+      border-radius: 999px;
+      padding: 9px 14px;
+      background: #FFFAFC;
+      color: #987084;
+      font: inherit;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: .2s;
+    }
+
+    .nav-button.primary {
+      background: #D7A7BC;
+      border-color: #D7A7BC;
+      color: white;
+    }
+
+    .nav-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px #D7A7BC25;
+    }
+
+    .hero {
+      width: 84%;
+      min-height: 340px;
+      margin: 36px auto;
+      padding: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border: 1px solid #F7E3EB;
+      border-radius: 28px;
+      background: linear-gradient(125deg, #FFF3F7, #F8DDE8);
+    }
+
+    .hero-text { max-width: 530px; }
+
+    .eyebrow {
+      color: #B17F96;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    h1 {
+      margin: 20px 0;
+      color: #624B57;
+      font-size: clamp(35px, 5vw, 58px);
+      line-height: 1.25;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      color: #8B707D;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .hero-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 145px;
+      height: 145px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #FFFAFC;
+      color: #D7A7BC;
+      font-size: 76px;
+    }
+
+    .section {
+      width: 84%;
+      margin: 65px auto;
+    }
+
+    .section-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .section-top h2 {
+      margin: 0 0 10px;
+      color: #624B57;
+      font-size: 26px;
+    }
+
+    .section-top p {
+      margin: 0;
+      color: #A18D96;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .count {
+      color: #C092A7;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .boards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .board {
+      display: block;
+      min-height: 230px;
+      padding: 27px;
+      border: 1px solid #F1E3E9;
+      border-radius: 22px;
+      background: #FFFFFF;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .board:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px #D7A7BC20;
+    }
+
+    .board-number {
+      color: #C092A7;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .board h3 {
+      margin: 27px 0 12px;
+      color: #705563;
+      font-size: 32px;
+    }
+
+    .board p {
+      margin: 0;
+      color: #A18D96;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .board-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid #F6EAF0;
+      color: #B8879D;
+      font-size: 12px;
+    }
+
+    .notice {
+      width: 84%;
+      margin: 0 auto 65px;
+      padding: 25px 28px;
+      border: 1px solid #F5E5EC;
+      border-radius: 18px;
+      background: #FFF3F7;
+      color: #967986;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .notice strong { color: #876475; }
+
+    footer {
+      padding: 30px 15px;
+      border-top: 1px solid #F3E4EA;
+      color: #B7A1AC;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    /* 회원가입 / 로그인 창 */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: #59424b55;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .auth-modal {
+      width: min(420px, 100%);
+      padding: 28px;
+      border: 1px solid #F1DDE6;
+      border-radius: 22px;
+      background: #FFFCFD;
+      box-shadow: 0 20px 70px #5d34451f;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-head h2 {
+      margin: 0;
+      color: #624B57;
+      font-size: 22px;
+    }
+
+    .close-modal {
+      border: 0;
+      background: transparent;
+      color: #A18D96;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .auth-modal label {
+      display: block;
+      margin: 12px 0 6px;
+      color: #876475;
+      font-size: 13px;
+    }
+
+    .auth-modal input {
+      width: 100%;
+      padding: 12px 13px;
+      border: 1px solid #EAD5DE;
+      border-radius: 10px;
+      outline: none;
+      background: white;
+      color: #51434A;
+      font: inherit;
+    }
+
+    .auth-modal input:focus {
+      border-color: #D7A7BC;
+      box-shadow: 0 0 0 3px #D7A7BC25;
+    }
+
+    .modal-submit {
+      width: 100%;
+      margin-top: 18px;
+      padding: 12px;
+      border: 0;
+      border-radius: 10px;
+      background: #D7A7BC;
+      color: white;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .modal-submit:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .modal-switch {
+      margin: 16px 0 0;
+      color: #A18D96;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .text-button {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: #B17F96;
+      text-decoration: underline;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .auth-message {
+      min-height: 20px;
+      margin: 12px 0 0;
+      color: #A14E72;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .user-status {
+      color: #B18A9C;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    [hidden] { display: none !important; }
+
+    @media (max-width: 700px) {
+      .navbar {
+        padding: 18px 6%;
+        flex-wrap: wrap;
+      }
+
+      .nav-label { font-size: 9px; }
+
+      .nav-right {
+        margin-left: auto;
+        gap: 10px;
+      }
+
+      .nav-right > .nav-label { display: none; }
+
+      .auth-actions { gap: 6px; }
+
+      .nav-button {
+        padding: 8px 10px;
+        font-size: 11px;
+      }
+
+      .hero {
+        width: 90%;
+        min-height: 300px;
+        padding: 32px 25px;
+      }
+
+      .hero-mark { display: none; }
+
+      .section, .notice { width: 90%; }
+
+      .boards { grid-template-columns: 1fr; }
+
+      .board { min-height: 200px; }
+
+      .section-top { align-items: start; }
+
+      .count { padding-top: 6px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">TRAVEL SCHOOL</div>
+    <div class="nav-label">금곡고등학교</div>
+
+    <div class="nav-right">
+      <div class="nav-label">OUR JOURNEY ARCHIVE</div>
+
+      <div class="auth-actions" id="authActions">
+        <button class="nav-button" type="button" id="openLogin">로그인</button>
+        <button class="nav-button primary" type="button" id="openSignup">회원가입</button>
+      </div>
+
+      <div class="auth-actions" id="loggedInActions" hidden>
+        <span class="user-status" id="userStatus"></span>
+        <button class="nav-button" type="button" id="logoutButton">로그아웃</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <div class="eyebrow">GEUMGOK HIGH SCHOOL</div>
+        <h1>여행학교의<br>기록을 모으다.</h1>
+        <p>
+          각 기수의 경험과 프로젝트를 기록하고 공유하는 공간.<br>
+          여행에서 시작된 우리의 이야기를 모아 봅니다.
+        </p>
+      </div>
+      <div class="hero-mark">✳</div>
+    </section>
+
+    <section class="section">
+      <div class="section-top">
+        <div>
+          <h2>기수별 아카이브</h2>
+          <p>각 기수의 프로젝트와 활동 기록을 확인해 보세요.</p>
+        </div>
+        <div class="count">03 ARCHIVES</div>
+      </div>
+
+      <div class="boards">
+        <a class="board" href="05.html">
+          <div class="board-number">ARCHIVE · 01</div>
+          <h3>05기</h3>
+          <p>5기의 프로젝트와<br>여행학교 활동 기록</p>
+          <div class="board-bottom">
+            <span>5기 게시판</span><span>↗</span>
+          </div>
+        </a>
+
+        <a class="board" href="06.html">
+          <div class="board-number">ARCHIVE · 02</div>
+          <h3>06기</h3>
+          <p>6기의 프로젝트와<br>여행학교 활동 기록</p>
+          <div class="board-bottom">
+            <span>6기 게시판</span><span>↗</span>
+          </div>
+        </a>
+
+        <a class="board" href="07.html">
+          <div class="board-number">ARCHIVE · 03</div>
+          <h3>07기</h3>
+          <p>7기의 프로젝트와<br>여행학교 활동 기록</p>
+          <div class="board-bottom">
+            <span>7기 게시판</span><span>↗</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="notice" id="notice">
+      <strong>TRAVEL SCHOOL ARCHIVE</strong><br>
+      여행학교의 프로젝트와 활동 과정을 기록하고 공유하기 위한 공간입니다.
+    </section>
+  </main>
+
+  <footer>TRAVEL SCHOOL · PROJECT ARCHIVE</footer>
+
+  <div class="modal-backdrop" id="authBackdrop"
+       role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <section class="auth-modal">
+      <div class="modal-head">
+        <h2 id="modalTitle">회원가입</h2>
+        <button type="button" class="close-modal" id="closeModal"
+                aria-label="닫기">×</button>
+      </div>
+
+      <form id="authForm">
+        <div id="nameField">
+          <label for="displayName">이름</label>
+          <input id="displayName" type="text" maxlength="40"
+                 autocomplete="nickname" placeholder="게시판에 표시할 이름">
+        </div>
+
+        <label for="authEmail">이메일</label>
+        <input id="authEmail" type="email" required
+               autocomplete="email" placeholder="이메일 주소">
+
+        <label for="authPassword">비밀번호</label>
+        <input id="authPassword" type="password" required minlength="6"
+               autocomplete="new-password" placeholder="6자 이상">
+
+        <button class="modal-submit" type="submit" id="submitAuth">가입하기</button>
+      </form>
+
+      <p class="auth-message" id="authMessage" role="status"></p>
+
+      <p class="modal-switch" id="switchPrompt">
+        이미 계정이 있나요?
+        <button class="text-button" type="button" id="switchMode">로그인</button>
+      </p>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://xbzwlzfyaagihbpspjvd.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_5M6MJrq6UdrJZpC0GRBc9Q_c4CvqS_P";
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    const backdrop = document.getElementById("authBackdrop");
+    const authForm = document.getElementById("authForm");
+    const modalTitle = document.getElementById("modalTitle");
+    const nameField = document.getElementById("nameField");
+    const displayName = document.getElementById("displayName");
+    const authEmail = document.getElementById("authEmail");
+    const authPassword = document.getElementById("authPassword");
+    const submitAuth = document.getElementById("submitAuth");
+    const authMessage = document.getElementById("authMessage");
+    const switchPrompt = document.getElementById("switchPrompt");
+
+    let authMode = "signup";
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      const isSignup = mode === "signup";
+
+      modalTitle.textContent = isSignup ? "회원가입" : "로그인";
+      nameField.hidden = !isSignup;
+      displayName.required = isSignup;
+      authPassword.autocomplete = isSignup
+        ? "new-password"
+        : "current-password";
+
+      submitAuth.textContent = isSignup ? "가입하기" : "로그인";
+
+      switchPrompt.replaceChildren(
+        document.createTextNode(
+          isSignup ? "이미 계정이 있나요? " : "아직 계정이 없나요? "
+        )
+      );
+
+      const switchButton = document.createElement("button");
+      switchButton.type = "button";
+      switchButton.className = "text-button";
+      switchButton.textContent = isSignup ? "로그인" : "회원가입";
+      switchButton.addEventListener("click", () => {
+        setAuthMode(authMode === "signup" ? "login" : "signup");
+      });
+
+      switchPrompt.appendChild(switchButton);
+      authMessage.textContent = "";
+    }
+
+    function openAuth(mode) {
+      setAuthMode(mode);
+      backdrop.classList.add("open");
+      setTimeout(() => authEmail.focus(), 0);
+    }
+
+    function closeAuth() {
+      backdrop.classList.remove("open");
+      authMessage.textContent = "";
+    }
+
+    document.getElementById("openSignup").addEventListener("click", () => {
+      openAuth("signup");
+    });
+
+    document.getElementById("openLogin").addEventListener("click", () => {
+      openAuth("login");
+    });
+
+    document.getElementById("closeModal").addEventListener("click", closeAuth);
+
+    backdrop.addEventListener("click", event => {
+      if (event.target === backdrop) closeAuth();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeAuth();
+    });
+
+    async function refreshSessionUI() {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+
+      document.getElementById("authActions").hidden = !!session;
+      document.getElementById("loggedInActions").hidden = !session;
+
+      document.getElementById("userStatus").textContent = session
+        ? (session.user.user_metadata.display_name || session.user.email)
+        : "";
+    }
+
+    authForm.addEventListener("submit", async event => {
+      event.preventDefault();
+      submitAuth.disabled = true;
+      authMessage.textContent =
+        authMode === "signup" ? "가입 처리 중..." : "로그인 중...";
+
+      try {
+        let result;
+
+        if (authMode === "signup") {
+          result = await supabaseClient.auth.signUp({
+            email: authEmail.value.trim(),
+            password: authPassword.value,
+            options: {
+              data: { display_name: displayName.value.trim() }
+            }
+          });
+
+          if (result.error) throw result.error;
+
+          if (result.data.session) {
+            authMessage.textContent = "회원가입과 로그인이 완료됐어요.";
+            await refreshSessionUI();
+            setTimeout(closeAuth, 900);
+          } else {
+            authMessage.textContent =
+              "가입 요청이 완료됐어요. 이메일 인증이 필요하면 메일함을 확인해 주세요.";
+          }
+        } else {
+          result = await supabaseClient.auth.signInWithPassword({
+            email: authEmail.value.trim(),
+            password: authPassword.value
+          });
+
+          if (result.error) throw result.error;
+
+          authMessage.textContent = "로그인 성공!";
+          await refreshSessionUI();
+          setTimeout(closeAuth, 700);
+        }
+      } catch (error) {
+        authMessage.textContent =
+          "처리 실패: " + (error.message || "다시 시도해 주세요.");
+      } finally {
+        submitAuth.disabled = false;
+      }
+    });
+
+    document.getElementById("logoutButton").addEventListener("click", async () => {
+      const { error } = await supabaseClient.auth.signOut();
+
+      if (error) {
+        alert("로그아웃 실패: " + error.message);
+      }
+
+      await refreshSessionUI();
+    });
+
+    supabaseClient.auth.onAuthStateChange(() => {
+      refreshSessionUI();
+    });
+
+    refreshSessionUI();
+  </script>
+</body>
+</html>
