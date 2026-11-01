@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>금곡고등학교 여행학교 | 07기</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, "Malgun Gothic", sans-serif; background: #fff7fa; color: #59454f; }
+    header { padding: 22px 7%; background: white; border-bottom: 1px solid #f5dce6; color: #c76f91; font-weight: bold; letter-spacing: 2px; }
+    main { max-width: 850px; margin: 45px auto; padding: 0 22px; }
+    .back, .login-link { color: #bd7894; text-decoration: none; font-size: 14px; }
+    .heading { margin: 35px 0; }
+    .heading small { color: #bd829a; letter-spacing: 3px; }
+    h1 { font-size: 42px; margin: 12px 0; }
+    .description { color: #927b85; line-height: 1.8; }
+    .notice { background: #ffe8f0; border-radius: 16px; padding: 20px; margin: 28px 0; line-height: 1.8; }
+    .post-box, .post { background: white; border: 1px solid #f2dce5; border-radius: 18px; padding: 22px; }
+    input, textarea { width: 100%; padding: 13px; margin: 8px 0; border: 1px solid #efd6e0; border-radius: 10px; font: inherit; background: #fffafd; color: #59454f; }
+    input:disabled, textarea:disabled { background: #f8f0f3; }
+    textarea { min-height: 130px; resize: vertical; }
+    input[type="file"] { background: white; }
+    button { border: 0; background: #d987a7; color: white; padding: 11px 18px; border-radius: 999px; cursor: pointer; font: inherit; }
+    button:hover { background: #c66f92; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .status { margin: 12px 0; font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
+    .error { color: #b42345; }
+    .success { color: #39794d; }
+    #posts { margin-top: 28px; }
+    .post { margin: 14px 0; overflow-wrap: anywhere; }
+    .post h3 { margin: 0 0 10px; }
+    .post p { white-space: pre-wrap; line-height: 1.7; }
+    .post-meta { color: #a58c97; font-size: 13px; }
+    .post-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .edit-button { background: #b99aaa; }
+    .delete-button { background: #a58c97; }
+    .cancel-button { background: #927b85; }
+    .edit-area { margin-top: 12px; }
+    .attachment-list { display: grid; gap: 12px; margin-top: 16px; }
+    .attachment-item { border: 1px solid #f2dce5; border-radius: 12px; padding: 12px; background: #fffafd; }
+    .attachment-item img { display: block; max-width: 100%; max-height: 420px; border-radius: 8px; margin: 8px 0; object-fit: contain; }
+    .attachment-item video { display: block; width: 100%; max-height: 420px; border-radius: 8px; margin: 8px 0; background: #222; }
+    .attachment-item a, .youtube-box a { color: #bd7894; overflow-wrap: anywhere; }
+    .youtube-box { margin-top: 16px; padding: 12px; border: 1px solid #f2dce5; border-radius: 12px; background: #fffafd; }
+    .youtube-box iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 8px; margin-top: 8px; }
+    .file-help { color: #927b85; font-size: 13px; line-height: 1.7; }
+    footer { text-align: center; padding: 35px 10px; color: #b49aa5; font-size: 12px; }
+    @media (max-width: 600px) {
+      main { margin: 30px auto; }
+      h1 { font-size: 34px; }
+      .post-box, .post { padding: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <header>GEUMGOK HIGH SCHOOL · TRAVEL SCHOOL</header>
+
+  <main>
+    <a class="back" href="geumgok.html">← 메인으로 돌아가기</a>
+
+    <section class="heading">
+      <small>OUR JOURNEY ARCHIVE</small>
+      <h1>07기 게시판</h1>
+      <div class="description">금곡고등학교 여행학교 07기의 기록을 모으는 공간입니다.</div>
+    </section>
+
+    <div class="notice">
+      <strong>✳ 07기의 여행 기록</strong><br>
+      여행학교에서 경험한 일과 느낀 점을 자유롭게 기록해 보세요.
+    </div>
+
+    <section class="post-box">
+      <h2>새 기록 작성하기</h2>
+      <div id="loginStatus" class="status">로그인 상태를 확인하고 있습니다.</div>
+
+      <input id="title" placeholder="제목을 입력해 주세요" maxlength="150" disabled>
+      <input id="author" placeholder="로그인 후 작성자 이름이 표시됩니다" disabled>
+      <textarea id="content" placeholder="여행학교에서의 경험을 기록해 주세요" disabled></textarea>
+
+      <label for="attachments"><strong>사진·영상·파일 첨부</strong></label>
+      <input id="attachments" type="file" multiple
+        accept="image/jpeg,image/png,image/gif,image/webp,video/mp4,video/webm,application/pdf,text/plain,.doc,.docx,.xls,.xlsx,.ppt,.pptx,image/avif,image/heic,image/heif,image/bmp,image/tiff,video/quicktime,.avif,.heic,.heif,.bmp,.tif,.tiff,.mov"
+        disabled>
+      <div class="file-help">
+        파일당 최대 50MB · 게시글당 최대 5개 파일.
+        사진, MP4/WebM 영상, PDF 및 문서 파일을 지원합니다.
+      </div>
+      <div id="selectedFiles" class="file-help">선택된 파일 없음</div>
+
+      <label for="youtubeUrl"><strong>관련 링크 (선택)</strong></label>
+      <textarea id="youtubeUrl" rows="3" placeholder="YouTube, 네이버, Google Drive 등 링크를 한 줄에 하나씩 입력" disabled></textarea>
+      <div class="file-help">
+        YouTube 링크는 영상으로 표시되고, 다른 사이트 링크는 새 창에서 열립니다.
+      </div>
+
+      <button id="submitButton" disabled>기록 올리기 ↗</button>
+      <p><a class="login-link" href="geumgok.html">로그인 및 회원가입은 메인 페이지에서 진행해 주세요.</a></p>
+    </section>
+
+    <section id="posts">
+      <h2>우리의 기록</h2>
+      <p class="description">기록을 불러오고 있습니다.</p>
+    </section>
+  </main>
+
+  <footer>TRAVEL SCHOOL · 07기 ARCHIVE</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tus-js-client@4/dist/tus.min.js"></script>
+  <script>
+    const SUPABASE_URL = "https://xbzwlzfyaagihbpspjvd.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_5M6MJrq6UdrJZpC0GRBc9Q_c4CvqS_P";
+    const COHORT = "07기";
+    const BUCKET = "travel-school-files";
+    const MAX_FILE_SIZE = 50 * 1024 * 1024;
+    const MAX_FILES = 5;
+
+    const ALLOWED_MIMES = new Set([
+      "image/jpeg", "image/png", "image/gif", "image/webp",
+      "video/mp4", "video/webm", "application/pdf", "text/plain",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "application/vnd.ms-powerpoint",
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    ]);
+
+    const MIME_BY_EXTENSION = Object.freeze({
+      jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png",
+      gif: "image/gif", webp: "image/webp", avif: "image/avif",
+      heic: "image/heic", heif: "image/heif", bmp: "image/bmp",
+      tif: "image/tiff", tiff: "image/tiff",
+      mp4: "video/mp4", webm: "video/webm", mov: "video/quicktime",
+      pdf: "application/pdf", txt: "text/plain",
+      doc: "application/msword",
+      docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      xls: "application/vnd.ms-excel",
+      xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      ppt: "application/vnd.ms-powerpoint",
+      pptx: "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    });
+    const EXTENSION_MIMES = new Set(Object.values(MIME_BY_EXTENSION));
+    const TUS_THRESHOLD = 6 * 1024 * 1024;
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    let currentUser = null;
+    let loadingPosts = false;
+    let postsReloadRequested = false;
+
+    const titleInput = document.getElementById("title");
+    const authorInput = document.getElementById("author");
+    const contentInput = document.getElementById("content");
+    const linksInput = document.getElementById("youtubeUrl");
+    const attachmentsInput = document.getElementById("attachments");
+    const selectedFiles = document.getElementById("selectedFiles");
+    const submitButton = document.getElementById("submitButton");
+    const loginStatus = document.getElementById("loginStatus");
+    const postsContainer = document.getElementById("posts");
+
+    function displayStatus(message, type = "") {
+      loginStatus.textContent = message;
+      loginStatus.className = "status " + type;
+    }
+
+    function getDisplayName(user) {
+      return user?.user_metadata?.display_name ||
+        user?.user_metadata?.full_name ||
+        user?.email || "사용자";
+    }
+
+    function isAdmin() {
+      return currentUser?.app_metadata?.role === "admin";
+    }
+
+    function updateLoginUI() {
+      const loggedIn = Boolean(currentUser);
+      titleInput.disabled = !loggedIn;
+      contentInput.disabled = !loggedIn;
+      linksInput.disabled = !loggedIn;
+      attachmentsInput.disabled = !loggedIn;
+      submitButton.disabled = !loggedIn;
+      authorInput.value = loggedIn ? getDisplayName(currentUser) : "";
+
+      displayStatus(loggedIn
+        ? "로그인되었습니다: " + getDisplayName(currentUser)
+        : "글을 작성하려면 메인 페이지에서 로그인해 주세요.");
+    }
+
+    async function checkLogin() {
+      const { data, error } = await supabaseClient.auth.getUser();
+
+      if (error) {
+        currentUser = null;
+        updateLoginUI();
+        displayStatus("로그인 확인 오류: " + error.message, "error");
+        return false;
+      }
+
+      currentUser = data.user || null;
+      updateLoginUI();
+      return true;
+    }
+
+    function showDatabaseError(action, error) {
+      console.error(action + " 오류:", error);
+      const message = error?.message || "원인을 확인할 수 없는 오류입니다.";
+      displayStatus(action + " 실패: " + message, "error");
+      alert(action + "에 실패했습니다.\n\n" + message);
+    }
+
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + " B";
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+      return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+    }
+
+    function safeFileName(name) {
+      return name.normalize("NFKC")
+        .replace(/[\\/<>:"|?*\u0000-\u001F]/g, "_")
+        .slice(-140) || "file";
+    }
+
+    function getFileMime(file) {
+      const mime = String(file.type || "").toLowerCase();
+      if (ALLOWED_MIMES.has(mime) || EXTENSION_MIMES.has(mime)) return mime;
+      return MIME_BY_EXTENSION[file.name.split(".").pop().toLowerCase()] || "";
+    }
+
+    function validateFiles(files) {
+      if (files.length > MAX_FILES) {
+        throw new Error("한 게시글에는 파일을 최대 " + MAX_FILES + "개까지 첨부할 수 있습니다.");
+      }
+
+      for (const file of files) {
+        if (file.size > MAX_FILE_SIZE) {
+          throw new Error(file.name + " 파일이 50MB를 초과합니다.");
+        }
+
+        if (!getFileMime(file)) {
+          throw new Error(file.name + " 파일 형식은 지원하지 않습니다.");
+        }
+      }
+    }
+
+    attachmentsInput.addEventListener("change", () => {
+      const files = Array.from(attachmentsInput.files || []);
+
+      try {
+        validateFiles(files);
+        selectedFiles.textContent = files.length
+          ? files.map(f => f.name + " (" + formatBytes(f.size) + ")").join(" · ")
+          : "선택된 파일 없음";
+      } catch (error) {
+        attachmentsInput.value = "";
+        selectedFiles.textContent = "선택된 파일 없음";
+        alert(error.message);
+      }
+    });
+
+    function normalizeExternalUrl(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      try {
+        const input = /^https?:\/\//i.test(raw) ? raw : "https://" + raw;
+        const url = new URL(input);
+        if (!["http:", "https:"].includes(url.protocol) || !url.hostname) throw new Error();
+        return url.href;
+      } catch (_) {
+        throw new Error("링크 주소를 확인해 주세요. http:// 또는 https:// 주소를 입력하면 됩니다.");
+      }
+    }
+
+    function parseExternalLinks(value) {
+      const entries = String(value || "").split(/\r?\n/).map(item => item.trim()).filter(Boolean);
+      return [...new Set(entries.map(normalizeExternalUrl))];
+    }
+
+    function getYouTubeId(value) {
+      if (!value) return null;
+
+      try {
+        const url = new URL(value.trim());
+        const host = url.hostname.replace(/^www\./, "").toLowerCase();
+
+        if (host === "youtu.be") {
+          return url.pathname.split("/").filter(Boolean)[0] || null;
+        }
+
+        if (["youtube.com", "m.youtube.com", "youtube-nocookie.com"].includes(host)) {
+          if (url.pathname === "/watch") return url.searchParams.get("v");
+          const match = url.pathname.match(/^\/(embed|shorts|live)\/([^/?]+)/);
+          return match ? match[2] : null;
+        }
+      } catch (_) {}
+
+      return null;
+    }
+
+    async function loadPosts() {
+      if (loadingPosts) {
+        postsReloadRequested = true;
+        return;
+      }
+
+      loadingPosts = true;
+      postsReloadRequested = false;
+
+      try {
+        const { data, error } = await supabaseClient
+          .from("posts")
+          .select("id, cohort, title, content, youtube_url, author_name, user_id, created_at")
+          .eq("cohort", COHORT)
+          .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        const attachmentMap = new Map();
+        const postIds = (data || []).map(p => p.id);
+
+        if (postIds.length) {
+          const { data: files, error: fileError } = await supabaseClient
+            .from("post_attachments")
+            .select("id, post_id, cohort, file_path, file_name, mime_type, file_size")
+            .eq("cohort", COHORT)
+            .in("post_id", postIds)
+            .order("created_at", { ascending: true });
+
+          if (fileError) throw fileError;
+
+          for (const file of files || []) {
+            const { data: signed, error: signedError } = await supabaseClient
+              .storage.from(BUCKET)
+              .createSignedUrl(file.file_path, 3600);
+
+            file.signedUrl = signedError ? null : signed?.signedUrl;
+
+            if (!attachmentMap.has(file.post_id)) {
+              attachmentMap.set(file.post_id, []);
+            }
+
+            attachmentMap.get(file.post_id).push(file);
+          }
+        }
+
+        postsContainer.replaceChildren();
+
+        const heading = document.createElement("h2");
+        heading.textContent = "우리의 기록";
+        postsContainer.appendChild(heading);
+
+        if (!data || !data.length) {
+          const empty = document.createElement("p");
+          empty.className = "description";
+          empty.textContent = "아직 기록이 없습니다. 첫 번째 기록을 남겨 보세요!";
+          postsContainer.appendChild(empty);
+          return;
+        }
+
+        data.forEach(post => renderPost(post, attachmentMap.get(post.id) || []));
+      } catch (error) {
+        console.error("게시글 불러오기 오류:", error);
+        postsContainer.replaceChildren();
+
+        const heading = document.createElement("h2");
+        heading.textContent = "우리의 기록";
+
+        const message = document.createElement("p");
+        message.className = "description error";
+        message.textContent = "게시글을 불러오지 못했습니다: " +
+          (error?.message || "알 수 없는 오류");
+
+        postsContainer.append(heading, message);
+      } finally {
+        loadingPosts = false;
+
+        if (postsReloadRequested) {
+          postsReloadRequested = false;
+          loadPosts();
+        }
+      }
+    }
+
+    function renderLinks(container, value) {
+      const links = String(value || "").split(/\r?\n/)
+        .map(item => item.trim()).filter(Boolean)
+        .map(item => { try { return normalizeExternalUrl(item); } catch (_) { return ""; } })
+        .filter(Boolean);
+
+      links.forEach(linkUrl => {
+        const videoId = getYouTubeId(linkUrl);
+        const box = document.createElement("div");
+        box.className = "youtube-box";
+        const heading = document.createElement("strong");
+        heading.textContent = videoId ? "YouTube 영상" : "관련 링크";
+        box.appendChild(heading);
+
+        if (videoId && /^[a-zA-Z0-9_-]{6,}$/.test(videoId)) {
+          const iframe = document.createElement("iframe");
+          iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(videoId);
+          iframe.title = "YouTube 영상 플레이어";
+          iframe.loading = "lazy";
+          iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+          iframe.referrerPolicy = "strict-origin-when-cross-origin";
+          iframe.allowFullscreen = true;
+          box.appendChild(iframe);
+        }
+
+        const link = document.createElement("a");
+        link.href = linkUrl;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = videoId ? "YouTube에서 열기 ↗" : new URL(linkUrl).hostname + "에서 열기 ↗";
+        box.appendChild(link);
+        container.appendChild(box);
+      });
+    }
+
+    function renderAttachments(container, files) {
+      if (!files.length) return;
+
+      const list = document.createElement("div");
+      list.className = "attachment-list";
+
+      const heading = document.createElement("strong");
+      heading.textContent = "첨부파일";
+      list.appendChild(heading);
+
+      for (const file of files) {
+        const item = document.createElement("div");
+        item.className = "attachment-item";
+
+        const name = document.createElement("div");
+        name.textContent = file.file_name + " · " +
+          formatBytes(Number(file.file_size) || 0);
+        item.appendChild(name);
+
+        if (!file.signedUrl) {
+          const message = document.createElement("p");
+          message.className = "file-help";
+          message.textContent = "파일 링크를 만들 수 없습니다. 새로고침해 주세요.";
+          item.appendChild(message);
+        } else if (file.mime_type.startsWith("image/")) {
+          const img = document.createElement("img");
+          img.src = file.signedUrl;
+          img.alt = file.file_name;
+          img.loading = "lazy";
+          item.appendChild(img);
+
+          const link = document.createElement("a");
+          link.href = file.signedUrl;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "원본 사진 열기";
+          item.appendChild(link);
+        } else if (file.mime_type.startsWith("video/")) {
+          const video = document.createElement("video");
+          video.controls = true;
+          video.preload = "metadata";
+          video.src = file.signedUrl;
+          item.appendChild(video);
+
+          const link = document.createElement("a");
+          link.href = file.signedUrl;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "영상 새 창에서 열기";
+          item.appendChild(link);
+        } else {
+          const link = document.createElement("a");
+          link.href = file.signedUrl;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.download = file.file_name;
+          link.textContent = "파일 열기 / 다운로드";
+          item.appendChild(link);
+        }
+
+        list.appendChild(item);
+      }
+
+      container.appendChild(list);
+    }
+
+    function renderPost(post, files = []) {
+      const article = document.createElement("article");
+      article.className = "post";
+
+      const heading = document.createElement("h3");
+      heading.textContent = post.title || "(제목 없음)";
+
+      const meta = document.createElement("div");
+      meta.className = "post-meta";
+
+      const date = post.created_at
+        ? new Date(post.created_at).toLocaleString("ko-KR")
+        : "";
+
+      meta.textContent = "작성자: " + (post.author_name || "익명") +
+        (date ? " · " + date : "");
+
+      const body = document.createElement("p");
+      body.textContent = post.content || "";
+
+      article.append(heading, meta, body);
+      renderLinks(article, post.youtube_url);
+      renderAttachments(article, files);
+
+      if (currentUser && (post.user_id === currentUser.id || isAdmin())) {
+        const actions = document.createElement("div");
+        actions.className = "post-actions";
+
+        const editButton = document.createElement("button");
+        editButton.className = "edit-button";
+        editButton.textContent = "수정";
+        editButton.addEventListener("click", () => showEditForm(article, post));
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-button";
+        deleteButton.textContent = "삭제";
+        deleteButton.addEventListener("click", () => deletePost(post.id));
+
+        actions.append(editButton, deleteButton);
+        article.appendChild(actions);
+      }
+
+      postsContainer.appendChild(article);
+    }
+
+    function showEditForm(article, post) {
+      if (article.querySelector(".edit-area")) return;
+
+      const area = document.createElement("div");
+      area.className = "edit-area";
+
+      const editTitle = document.createElement("input");
+      editTitle.value = post.title || "";
+      editTitle.maxLength = 150;
+      editTitle.placeholder = "제목을 입력해 주세요";
+
+      const editContent = document.createElement("textarea");
+      editContent.value = post.content || "";
+      editContent.placeholder = "내용을 입력해 주세요";
+
+      const editLinksInput = document.createElement("textarea");
+      editLinksInput.rows = 3;
+      editLinksInput.value = post.youtube_url || "";
+      editLinksInput.placeholder = "YouTube 또는 다른 사이트 링크 (여러 개는 줄바꿈)";
+
+      const actions = document.createElement("div");
+      actions.className = "post-actions";
+
+      const saveButton = document.createElement("button");
+      saveButton.textContent = "수정 내용 저장";
+
+      saveButton.addEventListener("click", async () => {
+        const title = editTitle.value.trim();
+        const content = editContent.value.trim();
+        let linkText;
+        try {
+          linkText = parseExternalLinks(editLinksInput.value).join("\n");
+        } catch (error) {
+          alert(error.message);
+          return;
+        }
+
+        if (!title || !content) {
+          alert("제목과 내용을 모두 입력해 주세요.");
+          return;
+        }
+
+        
+
+        if (!currentUser) {
+          alert("로그인이 필요합니다.");
+          return;
+        }
+
+        saveButton.disabled = true;
+
+        try {
+          const { data, error } = await supabaseClient
+            .from("posts")
+            .update({
+              title,
+              content,
+              youtube_url: linkText || null
+            })
+            .eq("id", post.id)
+            .eq("cohort", COHORT)
+            .select("id");
+
+          if (error) throw error;
+
+          if (!data || !data.length) {
+            alert("수정된 글이 없습니다. 작성자 권한과 RLS 정책을 확인해 주세요.");
+            return;
+          }
+
+          await loadPosts();
+          alert("게시글이 수정되었습니다.");
+        } catch (error) {
+          showDatabaseError("게시글 수정", error);
+        } finally {
+          saveButton.disabled = false;
+        }
+      });
+
+      const cancelButton = document.createElement("button");
+      cancelButton.className = "cancel-button";
+      cancelButton.textContent = "취소";
+      cancelButton.addEventListener("click", () => area.remove());
+
+      actions.append(saveButton, cancelButton);
+      area.append(editTitle, editContent, editLinksInput, actions);
+      article.appendChild(area);
+    }
+
+    async function uploadLargeFile(path, file, contentType, onProgress) {
+      if (!window.tus || !window.tus.Upload) {
+        throw new Error("큰 파일 업로드 기능을 불러오지 못했습니다. 새로고침 후 다시 시도해 주세요.");
+      }
+      const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+      if (sessionError) throw sessionError;
+      if (!sessionData?.session?.access_token) {
+        throw new Error("로그인 세션이 만료되었습니다. 다시 로그인해 주세요.");
+      }
+      const storageHost = new URL(SUPABASE_URL).hostname.replace(/\.supabase\.co$/, ".storage.supabase.co");
+
+      await new Promise((resolve, reject) => {
+        const upload = new window.tus.Upload(file, {
+          endpoint: "https://" + storageHost + "/storage/v1/upload/resumable",
+          retryDelays: [0, 3000, 5000, 10000, 20000],
+          headers: { authorization: "Bearer " + sessionData.session.access_token },
+          uploadDataDuringCreation: true,
+          removeFingerprintOnSuccess: true,
+          metadata: { bucketName: BUCKET, objectName: path, contentType, cacheControl: "3600" },
+          chunkSize: 6 * 1024 * 1024,
+          onError: reject,
+          onProgress: (uploaded, total) => onProgress(total ? Math.floor(uploaded / total * 100) : 0),
+          onSuccess: resolve
+        });
+        upload.start();
+      });
+    }
+
+    async function uploadAttachments(user, files) {
+      const uploadedFiles = [];
+      try {
+        for (let index = 0; index < files.length; index += 1) {
+          const file = files[index];
+          const contentType = getFileMime(file);
+          const path = `${COHORT}/${user.id}/${Date.now()}-` +
+            `${Math.random().toString(36).slice(2)}-${safeFileName(file.name)}`;
+          const progressLabel = `첨부파일 업로드 중 (${index + 1}/${files.length}) · ${file.name}`;
+
+          if (file.size > TUS_THRESHOLD) {
+            await uploadLargeFile(path, file, contentType, percent => {
+              displayStatus(progressLabel + " · " + percent + "%");
+            });
+          } else {
+            displayStatus(progressLabel);
+            const { error: uploadError } = await supabaseClient.storage.from(BUCKET)
+              .upload(path, file, { cacheControl: "3600", contentType, upsert: false });
+            if (uploadError) throw uploadError;
+          }
+
+          uploadedFiles.push({
+            file_path: path, file_name: file.name, mime_type: contentType,
+            file_size: file.size, cohort: COHORT, user_id: user.id
+          });
+        }
+        return uploadedFiles;
+      } catch (error) {
+        const paths = uploadedFiles.map(file => file.file_path);
+        if (paths.length) {
+          const { error: cleanupError } = await supabaseClient.storage.from(BUCKET).remove(paths);
+          if (cleanupError) console.error("업로드한 파일 정리 오류:", cleanupError);
+        }
+        throw error;
+      }
+    }
+
+    async function addPost() {
+      if (submitButton.disabled) return;
+      const title = titleInput.value.trim();
+      const content = contentInput.value.trim();
+      const files = Array.from(attachmentsInput.files || []);
+      let linkText;
+
+      if (!title || !content) {
+        alert("제목과 내용을 모두 입력해 주세요.");
+        return;
+      }
+      try {
+        linkText = parseExternalLinks(linksInput.value).join("\n");
+        validateFiles(files);
+      } catch (error) {
+        alert(error.message);
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = "등록 중입니다...";
+      let uploadedFiles = [];
+      let createdPost = null;
+      let user = null;
+
+      try {
+        const { data: userData, error: userError } = await supabaseClient.auth.getUser();
+        if (userError) throw userError;
+        user = userData.user;
+        if (!user) {
+          currentUser = null;
+          updateLoginUI();
+          throw new Error("로그인 정보가 없습니다. 메인 페이지에서 다시 로그인해 주세요.");
+        }
+        currentUser = user;
+
+        if (files.length) uploadedFiles = await uploadAttachments(user, files);
+
+        const { data: post, error: postError } = await supabaseClient
+          .from("posts")
+          .insert({
+            cohort: COHORT,
+            title,
+            content,
+            youtube_url: linkText || null,
+            author_name: getDisplayName(user),
+            user_id: user.id
+          })
+          .select("id")
+          .single();
+        if (postError) throw postError;
+        createdPost = post;
+
+        if (uploadedFiles.length) {
+          const rows = uploadedFiles.map(file => ({ ...file, post_id: post.id }));
+          const { error: attachmentError } = await supabaseClient
+            .from("post_attachments")
+            .insert(rows);
+          if (attachmentError) throw attachmentError;
+        }
+
+        titleInput.value = "";
+        contentInput.value = "";
+        linksInput.value = "";
+        attachmentsInput.value = "";
+        selectedFiles.textContent = "선택된 파일 없음";
+        displayStatus("기록과 첨부파일이 등록되었습니다.", "success");
+        await loadPosts();
+        alert("기록이 등록되었습니다.");
+      } catch (error) {
+        const cleanupErrors = [];
+        if (createdPost) {
+          const { error: rowCleanupError } = await supabaseClient.from("post_attachments")
+            .delete().eq("post_id", createdPost.id).eq("cohort", COHORT);
+          if (rowCleanupError) cleanupErrors.push(rowCleanupError.message);
+          const { error: postCleanupError } = await supabaseClient.from("posts")
+            .delete().eq("id", createdPost.id).eq("cohort", COHORT).eq("user_id", user?.id);
+          if (postCleanupError) cleanupErrors.push(postCleanupError.message);
+        }
+        const paths = uploadedFiles.map(file => file.file_path);
+        if (paths.length) {
+          const { error: storageCleanupError } = await supabaseClient.storage.from(BUCKET).remove(paths);
+          if (storageCleanupError) cleanupErrors.push(storageCleanupError.message);
+        }
+        const message = error?.message || "알 수 없는 오류";
+        displayStatus("등록에 실패했습니다. 입력 내용과 선택한 파일은 그대로 남겨 두었습니다. " + message, "error");
+        if (cleanupErrors.length) {
+          console.error("등록 실패 후 정리 오류:", cleanupErrors);
+          displayStatus("등록은 실패했지만 일부 임시 파일을 정리하지 못했습니다. 관리자에게 알려 주세요.", "error");
+        }
+        alert("기록을 등록하지 못했습니다. 입력 내용과 선택한 파일은 유지했습니다.\n\n" + message);
+      } finally {
+        submitButton.textContent = "기록 올리기 ↗";
+        submitButton.disabled = !currentUser;
+      }
+    }
+
+    async function deletePost(postId) {
+      if (!currentUser) {
+        alert("먼저 로그인해 주세요.");
+        return;
+      }
+
+      if (!confirm("이 기록과 첨부파일을 삭제하시겠습니까?")) return;
+
+      try {
+        const { data: files, error: filesError } = await supabaseClient
+          .from("post_attachments")
+          .select("file_path")
+          .eq("post_id", postId)
+          .eq("cohort", COHORT);
+
+        if (filesError) throw filesError;
+
+        const paths = (files || []).map(f => f.file_path);
+
+        if (paths.length) {
+          const { error: storageError } = await supabaseClient
+            .storage.from(BUCKET).remove(paths);
+          if (storageError) throw storageError;
+        }
+
+        const { data, error } = await supabaseClient
+          .from("posts")
+          .delete()
+          .eq("id", postId)
+          .eq("cohort", COHORT)
+          .select("id");
+
+        if (error) throw error;
+
+        if (!data || !data.length) {
+          alert("삭제된 글이 없습니다. 작성자 권한과 RLS 정책을 확인해 주세요.");
+          return;
+        }
+
+        await loadPosts();
+        alert("게시글과 첨부파일이 삭제되었습니다.");
+      } catch (error) {
+        showDatabaseError("게시글 삭제", error);
+      }
+    }
+
+    submitButton.addEventListener("click", addPost);
+
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+      currentUser = session?.user || null;
+      updateLoginUI();
+      loadPosts();
+    });
+
+    async function init() {
+      await checkLogin();
+      await loadPosts();
+    }
+
+    init();
+  </script>
+</body>
+</html>
+
